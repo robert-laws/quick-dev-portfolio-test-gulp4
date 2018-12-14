@@ -34,61 +34,70 @@ var prefixerOptions = {
   browsers: ['last 2 versions']
 };
 
-function clean() {
+gulp.task('clean', function() {
   return del(['build']);
-}
+});
 
-function pug() {
-  return gulp.src(paths.pug.src)
+gulp.task('pug', function() {
+  var stream = gulp.src(paths.pug.src)
     .pipe(pug({
       pretty: true
     }))
-    .pipe(gulp.dest(paths.pug.dest))
-    .pipe(browserSync.stream())    
-}
+    .pipe(gulp.dest(paths.pug.dest));
+  return stream;
+});
 
-function styles() {
-  return gulp.src(paths.styles.src)
+gulp.task('styles', function() {
+  var stream = gulp.src(paths.styles.src)
     .pipe(sourcemaps.init())
     .pipe(sass(sassOptions).on("error", sass.logError))
     .pipe(prefix(prefixerOptions))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest(paths.styles.dest))
-    .pipe(browserSync.stream());
-}
+    .pipe(gulp.dest(paths.styles.dest));
+  return stream;
+});
 
-function scripts() {
-  return gulp.src(paths.scripts.src)
-    .pipe(gulp.dest(paths.scripts.dest))
-    .pipe(browserSync.stream())
-}
+gulp.task('scripts', function() {
+  var stream = gulp.src(paths.scripts.src)
+    .pipe(gulp.dest(paths.scripts.dest));
+  return stream;
+});
 
-function images() {
-  return gulp.src(paths.images.src, {since: gulp.lastRun(images)})
-    .pipe(gulp.dest(paths.images.dest))
-    .pipe(browserSync.stream());
-}
+gulp.task('images', function() {
+  var stream = gulp.src(paths.images.src)
+    .pipe(gulp.dest(paths.images.dest));
+  return stream;
+});
 
-function watch() {
+gulp.task('browser', function() {
   browserSync.init({
     server: {
       baseDir: "./build"
     }
   });
-  gulp.watch(paths.pug.src, pug);
-  gulp.watch(paths.styles.src, styles);
-  gulp.watch(paths.scripts.src, scripts);
-  gulp.watch(paths.images.src, images);
-}
 
-exports.clean = clean;
-exports.pug = pug;
-exports.styles = styles;
-exports.scripts = scripts;
-exports.images = images;
-exports.watch = watch;
+  gulp.watch(paths.pug.src, gulp.parallel('pug'))
+    .on('change', browserSync.reload);
 
-var build = gulp.series(clean, gulp.parallel(styles, scripts));
+  // watch and rebuild .js files
+  gulp.watch(paths.scripts.src, gulp.parallel('scripts'))
+    .on('change', browserSync.reload);
+ 
+  // watch and rebuild .css files
+  gulp.watch(paths.styles.src, gulp.parallel('styles'))
+    .on('change', browserSync.reload);
+ 
+  // Reload when html changes
+  gulp.watch(paths.images.src, gulp.parallel('images'))
+    .on('change', browserSync.reload);
+})
 
-gulp.tasks('build', build);
-gulp.tasks('default', gulp.series(build, watch));
+gulp.task('serve', gulp.series('clean',
+  gulp.parallel(
+    'pug',
+    'styles',
+    'scripts',
+    'images'),
+  'browser'));
+
+gulp.task('default', gulp.series('serve'));

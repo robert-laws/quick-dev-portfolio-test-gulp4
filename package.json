@@ -4,7 +4,9 @@
   "description": "pug, sass, and gulp4",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "gulp clean",
+    "default": "gulp default",
+    "build": "gulp build"
   },
   "repository": {
     "type": "git",
@@ -29,5 +31,8 @@
     "gulp-sass": "^4.0.2",
     "gulp-sourcemaps": "^2.6.4",
     "gulp4": "^4.0.2"
+  },
+  "dependencies": {
+    "gulp": "^4.0.0"
   }
 }
