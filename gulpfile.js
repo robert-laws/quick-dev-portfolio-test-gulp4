@@ -76,7 +76,7 @@ gulp.task('browser', function() {
     }
   });
 
-  gulp.watch(paths.pug.src, gulp.parallel('pug'))
+  gulp.watch(paths.pug.watch, gulp.parallel('pug'))
     .on('change', browserSync.reload);
 
   // watch and rebuild .js files

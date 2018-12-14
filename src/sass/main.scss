@@ -1,6 +1,16 @@
 // ABSTRACTS
+@import "abstracts/variables";
 @import "abstracts/colors";
 @import "abstracts/typography";
+@import "abstracts/mixins";
 
 // BASE
 @import "base/base";
+
+// COMPONENTS
+
+
+// LAYOUTS
+@import "layouts/header";
+@import "layouts/content";
+@import "layouts/footer";

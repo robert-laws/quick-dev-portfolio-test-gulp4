@@ -1,0 +1,131 @@
+.website-header {
+  max-width: 120rem;
+  margin: 0 auto;
+  padding: 0 0 2rem;
+  position: relative;
+
+  display: flex;
+  justify-content: space-between;
+
+  @include lg {
+    max-width: 100rem;
+  }
+
+  @include sm {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: flex-start;
+    padding-top: 1rem;
+    background-color: $color-white;
+    z-index: 10;
+    
+
+    @include sm {
+      align-items: center;
+      justify-content: center;
+    }
+
+    h1 {
+      align-self: center;
+    }
+
+    img {
+      padding: 1rem;
+      height: 9rem;
+      transition: all 0.2s ease-in 0.1s;
+
+      @include sm {
+        height: 7.5rem;
+      }
+
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+  }
+
+  &__navigation {
+    align-self: center;
+    margin-right: 0.5rem;
+    font-size: 1.8rem;
+    display: flex;
+    transition: margin-top 1s cubic-bezier(0.17, 0.04, 0.03, 0.94);
+
+    &.active-nav {
+      @include sm {
+        display: flex;
+        margin-top: 0rem;
+      }    
+  
+      @include rwd-max-min(100rem, $screen-sm-min) {
+        display: flex !important;
+        margin-top: 0rem;
+      }
+    }
+
+    @include sm {
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      margin-right: 0px;
+      margin-top: -21rem;
+      border-top: 5px solid $color-wet-asphalt;
+      border-bottom: 5px solid $color-wet-asphalt;
+    }
+    
+    a {
+      color: $color-wet-asphalt;
+      font-weight: bold;
+      margin: 2.5rem;
+      text-decoration: none;
+      display: inline-block;
+      position: relative;
+      transition: color 0.25s ease-out 0.1s;
+
+      @include sm {
+        margin: 1rem;
+      }
+
+      &::after {
+        content: '';
+        display: block;
+        width: 0;
+        height: 2px;
+        background: $color-wet-asphalt;
+        transition: width 0.2s ease-out 0.1s;
+      }
+
+      &:hover {
+        color: $color-wet-asphalt;
+      
+        &::after { 
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+#navbar-toggle {
+  display: none;
+
+  @include sm {
+    display: block;
+    position: absolute;
+    top: 1.5rem;
+    right: 2rem;
+    cursor: pointer;
+    color: rbga($color-black, 0.8);
+    font-size: 3rem;
+    z-index: 200;
+    transition: color 0.2s;
+
+    &:hover {
+      color: rgba($color-black, 1);
+    }
+  }
+}

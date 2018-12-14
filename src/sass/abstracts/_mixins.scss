@@ -1,0 +1,101 @@
+// MEDIA QUERIES
+
+// small tablets and large smartphones (landscape view)
+$screen-sm-min: 576px;
+
+// small tablets (portrait view)
+$screen-md-min: 800px;
+
+// tablets and small desktops
+$screen-lg-min: 1200px;
+
+// large desktops
+$screen-xl-min: 1600px;
+
+// small devices
+@mixin sm {
+  @media only screen and (max-width: #{$screen-sm-min}) {
+    @content;
+  }
+}
+
+// medium devices
+@mixin md {
+  @media only screen and (max-width: #{$screen-md-min}) {
+    @content;
+  }
+}
+
+// large devices
+@mixin lg {
+  @media only screen and (max-width: #{$screen-lg-min}) {
+    @content;
+  }
+}
+
+// extra-large devices
+@mixin xl {
+  @media only screen and (max-width: #{$screen-xl-min}) {
+    @content;
+  }
+}
+
+@mixin rwd($screen) {
+  @media only screen and (max-width: $screen + 'px') {
+    @content;
+  }
+}
+
+@mixin rwd-max-min($max-screen, $min-screen) {
+  @media only screen and (max-width: $max-screen) and (min-width: $min-screen) {
+    @content;
+  }
+}
+
+/* CONTENT SPLASH - LEFT AND RIGHT */
+
+@mixin splash-right-wide {
+  padding: 20rem 0;
+  background-color: lighten($color-primary-light, 20%);
+  clip-path: polygon(0% 10%, 100% 0%, 100% 100%, 0% 90%);
+}
+
+@mixin splash-left-wide {
+  padding: 20rem 0;
+  background-color: lighten($color-primary-light, 20%);
+  clip-path: polygon(0% 0%, 100% 10%, 100% 90%, 0% 100%);
+}
+
+@mixin splash-blog-dark {
+  padding: 20rem 0;
+  background-color: lighten($color-primary-light, 40%);
+  clip-path: polygon(0% 10%, 100% 0%, 100% 100%, 0% 90%);
+}
+
+@mixin splash-blog-light {
+  padding: 20rem 0;
+  background-color: lighten($color-primary-light, 50%);
+  clip-path: polygon(0% 0%, 100% 10%, 100% 90%, 0% 100%);
+}
+
+@mixin sideline-right-wide($self) {
+  #{$self}__sideline {
+    &--left {
+      flex: 1;
+    }
+    &--right {
+      flex: 0;
+    }
+  }
+}
+
+@mixin sideline-left-wide($self) {
+  #{$self}__sideline {
+    &--left {
+      flex: 0;
+    }
+    &--right {
+      flex: 1;
+    }
+  }
+}
