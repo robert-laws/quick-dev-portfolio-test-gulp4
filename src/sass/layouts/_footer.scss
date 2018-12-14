@@ -1,0 +1,118 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 4rem;
+
+  &__container--top {
+    flex: 1 0 50%;
+    min-height: 400px;
+    background-color: $color-wet-asphalt;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  &__container--bottom {
+    flex: 1;
+    background-color: lighten($color-wet-asphalt, 12%);
+    padding: 20px;
+    text-align: center;
+    color: $color-white;
+  }
+
+  &__section {
+    padding: 50px 12px 0;
+
+    @include sm {
+      padding-top: 40px 12px 0;
+    }
+
+    &--logo {
+      flex: 1;
+      text-align: right;
+
+      @include sm {
+        flex: 1 0 40%;
+      }
+
+      img {
+        width: 60px;
+        height: 60px;
+        transition: opacity 0.2s ease-in 0.1s;
+
+        &:hover {
+          opacity: 0.9;
+        }
+      }
+    }
+
+    &--sitemap {
+      flex: 1;
+      color: $color-white;
+      text-align: left;
+      margin-top: 1.5rem;
+
+      & > *:not(:first-child) {
+        margin-left: 0.5rem;
+      }
+
+      @include sm {
+        flex: 1 0 60%;
+      }
+
+      h5, p {
+        margin-bottom: 10px;
+      }
+
+      a {
+        color: $color-white;
+        text-decoration: none;
+
+        &:hover {
+          color: lighten($color-primary, 20%);
+        }
+      }
+    }
+
+    &--social-media {
+      flex: 1;
+      text-align: right;
+      // align-self: flex-start;
+
+      @include lg {
+        flex: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      @include sm {
+        flex: 1 0 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-end;
+        text-align: center;
+        padding-bottom: 3rem;
+      }
+      
+      a {
+        font-size: 3rem;
+        margin: 0 1.2rem;
+        color: $color-white;
+
+        &:hover {
+          color: lighten($color-primary, 20%);
+        }
+      }
+    }
+
+    &--placeholder {
+      flex: 1;
+
+      @include sm {
+        padding: 5px;
+      }
+    }
+  }
+}
