@@ -12,3 +12,5 @@ navbarToggle.addEventListener('click', function () {
     this.classList.add('active');
   }
 });
+
+// console.log('js running');

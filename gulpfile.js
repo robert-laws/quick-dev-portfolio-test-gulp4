@@ -76,19 +76,19 @@ gulp.task('browser', function() {
     }
   });
 
-  gulp.watch(paths.pug.watch, gulp.parallel('pug'))
+  gulp.watch(paths.pug.watch, { usePolling: true, interval: 1000 }, gulp.parallel('pug'))
     .on('change', browserSync.reload);
 
   // watch and rebuild .js files
-  gulp.watch(paths.scripts.src, gulp.parallel('scripts'))
+  gulp.watch(paths.scripts.src, { usePolling: true, interval: 1000 }, gulp.parallel('scripts'))
     .on('change', browserSync.reload);
  
   // watch and rebuild .css files
-  gulp.watch(paths.styles.src, gulp.parallel('styles'))
+  gulp.watch(paths.styles.src, { usePolling: true, interval: 1000 }, gulp.parallel('styles'))
     .on('change', browserSync.reload);
  
   // Reload when html changes
-  gulp.watch(paths.images.src, gulp.parallel('images'))
+  gulp.watch(paths.images.src, { usePolling: true, interval: 1000 }, gulp.parallel('images'))
     .on('change', browserSync.reload);
 })
 
